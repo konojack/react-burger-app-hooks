@@ -13,7 +13,7 @@ const buildControl = ({label}) => {
 }
 
 buildControl.propTypes = {
-
+    label: PropTypes.string
 }
 
 export default buildControl
