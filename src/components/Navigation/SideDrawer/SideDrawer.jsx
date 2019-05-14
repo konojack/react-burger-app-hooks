@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Logo from 'components/Logo/Logo'
 import NavigationItems from 'components/Navigation/NavigationItems/NavigationItems'
 import classes from './SideDrawer.module.scss'
+import Backdrop from 'components/UI/Backdrop/Backdrop'
 
-const sideDrawer = (props) => {
+const sideDrawer = ({open, closed}) => {
+  const attachedClasses = [classes.SideDrawer, classes.Close];
+  if(open) {
+    attachedClasses[1] = classes.Open;
+  }
   return (
-    <div className={classes.SideDrawer}>
-      <div className={classes.Logo}>
+    <Fragment>
+      <Backdrop show={open} clicked={closed}/>
+      <div className={attachedClasses.join(' ')}>
+        <div className={classes.Logo}>
           <Logo />
-      </div>
-      <nav>
+        </div>
+        <nav>
           <NavigationItems />
-      </nav>
-    </div>
+        </nav>
+      </div>
+    </Fragment>
   )
 }
 
