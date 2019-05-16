@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classes from './NavigationItems.module.scss'
 
 const navigationItems = (props) => (
@@ -8,9 +7,5 @@ const navigationItems = (props) => (
         <li><a href="/">Checkout</a></li>
     </ul>
 )
-
-navigationItems.propTypes = {
-
-}
 
 export default navigationItems
