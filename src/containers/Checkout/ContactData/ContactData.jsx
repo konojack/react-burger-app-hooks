@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import axios from 'axios-orders.js';
 
 import Spinner from 'components/UI/Spinner/Spinner'
