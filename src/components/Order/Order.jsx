@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './Order.module.scss'
 
-const Order = ({ ingredients, price }) => {
+const Order = ({ ingredients = {}, price }) => {
 
     const ingredientsParsed = Object.keys(ingredients).map(ingredient => {
         return (
-            <span className={classes.Ingredient}>
+            <span key={ingredient} className={classes.Ingredient}>
                 {ingredient}({ingredients[ingredient]})
             </span>
         )

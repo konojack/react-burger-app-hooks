@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classes from './Button.module.scss'
 
-const button = ({ children, clicked, btnType }) => (
+const button = ({ children, clicked, btnType, disabled }) => (
     <button
+        disabled={disabled}
         className={`${classes.Button} ${classes[btnType]}`}
         onClick={clicked}>{children}</button>
 )
