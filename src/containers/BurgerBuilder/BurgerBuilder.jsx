@@ -37,12 +37,7 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    var queryStringIngredients = Object.keys(this.props.ingredients).map(key => key + '=' + this.props.ingredients[key]).join('&');
-    var queryStringTotalPrice = `&price=${this.props.totalPrice}`;
-    this.props.history.push({
-      pathname: '/checkout',
-      search: `?${queryStringIngredients}${queryStringTotalPrice}`
-    })
+    this.props.history.push('/checkout');
   }
 
   updatePurchaseState = () => {
