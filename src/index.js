@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
-import reducer from './store/reducers/burgerBuilder';
+import reducer from './store/reducers';
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const store = createStore(reducer, composeEnhancers);
+const logger = state => next => action => {
+    console.log("DISPATCHING", action);
+    const result = next(action);
+    console.log(state.getState());
+    return result;
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)));
 
 
 ReactDOM.render(

@@ -13,19 +13,12 @@ import withErrorHandler from 'hoc/withErrorHandler/withErrorHandler';
 
 class BurgerBuilder extends Component {
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   }
 
   componentDidMount() {
-    // axios.get('/ingredients.json')
-    //   .then(resp => {
-    //     this.setState({ ingredients: resp.data })
-    //   })
-    //   .catch(error => {
-    //     this.setState({error: true})
-    //   })
+    const { onInitIngredients } = this.props;
+    onInitIngredients();
   }
 
   purchaseHandler = () => {
@@ -64,13 +57,9 @@ class BurgerBuilder extends Component {
 
 
 
-    let burger = this.state.error ? <p>Ingredients can't be loaded!</p> : <Spinner />
+    let burger = this.props.error ? <p>Ingredients can't be loaded!</p> : <Spinner />
 
     let orderSummary = null;
-
-    if (this.state.loading) {
-      orderSummary = <Spinner />
-    }
 
     if (this.props.ingredients) {
       burger = (<Fragment>
@@ -106,13 +95,15 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    ingredients: state.burgerBuilderReducer.ingredients,
+    totalPrice: state.burgerBuilderReducer.totalPrice,
+    error: state.burgerBuilderReducer.error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    onInitIngredients: () => dispatch(actions.initIngredients()),
     onIngredientAdded: (ingredientName) => dispatch(actions.addIngredient(ingredientName)),
     onIngredientRemoved: (ingredientName) => dispatch(actions.removeIngredient(ingredientName)),
   }
