@@ -95,7 +95,6 @@ class ContactData extends Component {
     }
 
     orderHandler = (event) => {
-        debugger;
         event.preventDefault();
         const formData = {};
         for (let formElementIdentifier in this.state.orderForm) {
@@ -202,9 +201,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.orderReducer.ingredients,
-        totalPrice: state.orderReducer.totalPrice,
-        loading: state.orderReducer.loading
+        ingredients: state.burgerBuilder.ingredients,
+        totalPrice: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
     }
 }
 

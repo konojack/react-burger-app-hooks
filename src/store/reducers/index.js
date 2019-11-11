@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import burgerBuilderReducer from './burgerBuilder';
-import orderReducer from './order';
+import burgerBuilder from './burgerBuilder';
+import order from './order';
 
 const store = combineReducers({
-    burgerBuilderReducer,
-    orderReducer
+    burgerBuilder,
+    order
 })
 
 export default store;

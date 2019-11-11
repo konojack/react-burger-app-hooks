@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 import CheckoutSummary from 'components/Order/CheckoutSummary/CheckoutSummary'
 import ContactData from './ContactData/ContactData'
 import { connect } from "react-redux";
+import * as actions from '../../store/actions';
 
 class Checkout extends Component {
+
+    componentWillMount() {
+        this.props.onPurchaseInit();
+    }
 
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
@@ -16,26 +21,39 @@ class Checkout extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <CheckoutSummary
-                    ingredients={this.props.ingredients}
-                    checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}
-                />
-                <Route
-                    path={`${this.props.match.path}/contact-data`}
-                    component={ContactData} />
-            </div>
-        )
+        let summary = <Redirect to="/" />
+        if (this.props.ingredients) {
+            const purchased = this.props.purchased ? <Redirect to="/" /> : null;
+            summary = (
+                <div>
+                    {purchased}
+                    <CheckoutSummary
+                        ingredients={this.props.ingredients}
+                        checkoutCancelled={this.checkoutCancelledHandler}
+                        checkoutContinued={this.checkoutContinuedHandler}
+                    />
+                    <Route
+                        path={`${this.props.match.path}/contact-data`}
+                        component={ContactData} />
+                </div>
+            )
+        }
+        return summary;
     }
 }
 
-const mapStateToPros = state => {
+const mapStateToProps = state => {
     return {
-        ingredients: state.burgerBuilderReducer.ingredients,
-        price: state.burgerBuilderReducer.totalPrice
+        ingredients: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        purchased: state.order.purchased
     }
 }
 
-export default connect(mapStateToPros)(Checkout)
+const mapDispatchToProps = dispatch => {
+    return {
+        onPurchaseInit: () => dispatch(actions.purchaseInit())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

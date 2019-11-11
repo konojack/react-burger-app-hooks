@@ -23,10 +23,15 @@ export const burgerPending = () => {
     }
 }
 
+export const purchaseInit = () => {
+    return {
+        type: actionTypes.PURCHASE_INIT
+    }
+}
+
 export const startPurchasingBurger = (orderData) => {
     return async dispatch => {
         try {
-            debugger;
             dispatch(burgerPending());
             const postOrder = await axios.post('/orders.json', orderData);
             dispatch(purchaseBurgerSuccess(postOrder.data.name, orderData));
