@@ -4,14 +4,14 @@ import Logo from 'components/Logo/Logo'
 import NavigationItems from 'components/Navigation/NavigationItems/NavigationItems'
 import DrawerToggle from 'components/Navigation/SideDrawer/DrawerToggle/DrawerToggle'
 
-const toolbar = ({drawerToggleClicked}) => (
+const toolbar = ({drawerToggleClicked, isAuth}) => (
     <header className={classes.Toolbar}>
         <DrawerToggle clicked={drawerToggleClicked}/>
         <div className={classes.Logo}>
             <Logo />
         </div>
         <nav className={classes.DesktopOnly}>
-            <NavigationItems />
+            <NavigationItems isAuth={isAuth}/>
         </nav>
     </header>
 )
