@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import classes from './Auth.module.scss';
 
@@ -41,7 +42,7 @@ export class Auth extends Component {
                 touched: false
             }
         },
-        isSignUp: true
+        isSignUp: false
     }
 
     checkValidity(value, rules = {}) {
@@ -120,14 +121,22 @@ export class Auth extends Component {
 
         let errorMessage = null;
 
-        if(this.props.error) {
+        if (this.props.error) {
             errorMessage = (
                 <p>{this.props.error.message}</p>
             )
         }
-        
+
+        const signButtonText = this.state.isSignUp ? "SWITCH TO SIGN IN" : "SWITCH TO SIGN UP";
+
+        let authRedirect = null;
+        if(this.props.isAuthenticated) {
+            authRedirect = <Redirect to="/" />
+        }
+
         return (
             <div className={classes.Auth}>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {formContent}
@@ -135,7 +144,7 @@ export class Auth extends Component {
                 </form>
                 <Button
                     btnType="Danger"
-                    clicked={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
+                    clicked={this.switchAuthModeHandler}>{signButtonText}</Button>
             </div>
         )
     }
@@ -144,7 +153,8 @@ export class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
