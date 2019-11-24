@@ -8,6 +8,7 @@ import Input from 'components/UI/Input/Input'
 import classes from './ContactData.module.scss'
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import { updateObject } from '../../../shared/utility';
 
 class ContactData extends Component {
     state = {
@@ -110,7 +111,7 @@ class ContactData extends Component {
         }
 
         this.props.onOrderBurger(order, this.props.token);
-        
+
     }
 
     checkValidity(value, rules = {}) {
@@ -152,18 +153,15 @@ class ContactData extends Component {
         }
 
         this.setState(prevState => ({
-            orderForm: {
-                ...prevState.orderForm,
-                [inputIdentifier]: {
-                    ...prevState.orderForm[inputIdentifier],
+            orderForm: updateObject(prevState.orderForm, {
+                [inputIdentifier]: updateObject(prevState.orderForm[inputIdentifier], {
                     value: myEventTargetValue,
                     valid: this.checkValidity(myEventTargetValue, prevState.orderForm[inputIdentifier].validation),
                     touched: true,
-                }
-            },
+                })
+            }),
             isFormValid: isFormValid
         }))
-
     }
 
 

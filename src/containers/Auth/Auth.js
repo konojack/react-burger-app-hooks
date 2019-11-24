@@ -9,6 +9,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner'
 
 import * as actions from '../../store/actions/';
+import { updateObject } from '../../shared/utility';
 
 export class Auth extends Component {
     state = {
@@ -46,7 +47,7 @@ export class Auth extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath();
         }
     }
@@ -75,15 +76,13 @@ export class Auth extends Component {
     }
 
     inputChangedHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
+        const updatedControls = updateObject(this.state.controls, {
+            [controlName]: updateObject(this.state.controls[controlName], {
                 value: event.target.value,
                 valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
-            }
-        }
+            })
+        })
         this.setState({ controls: updatedControls });
     }
 
@@ -136,7 +135,7 @@ export class Auth extends Component {
         const signButtonText = this.state.isSignUp ? "SWITCH TO SIGN IN" : "SWITCH TO SIGN UP";
 
         let authRedirect = null;
-        if(this.props.isAuthenticated) {
+        if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
