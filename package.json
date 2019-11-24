@@ -17,6 +17,8 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "5.12.0",
     "eslint-config-react-app": "^3.0.8",
     "eslint-loader": "2.1.1",
@@ -48,6 +50,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.12.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
@@ -115,8 +118,8 @@
       "node"
     ],
     "watchPlugins": [
-      "C:\\Users\\dk900507\\Desktop\\react-burger-app\\node_modules\\jest-watch-typeahead\\filename.js",
-      "C:\\Users\\dk900507\\Desktop\\react-burger-app\\node_modules\\jest-watch-typeahead\\testname.js"
+      "jest-watch-typeahead/filename.js",
+      "jest-watch-typeahead/testname.js"
     ]
   },
   "babel": {
