@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios-orders.js';
 import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/';
 
