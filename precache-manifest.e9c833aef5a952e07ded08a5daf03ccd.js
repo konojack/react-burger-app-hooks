@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/react-burger-app/static/css/4.5ebdcb48.chunk.css"
   },
   {
-    "revision": "63c16351eddca6a788b7",
+    "revision": "fa58283af33b60a1f284",
     "url": "/react-burger-app/static/css/main.2edbf74b.chunk.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/react-burger-app/static/js/3.bd32282d.chunk.js"
   },
   {
-    "revision": "63c16351eddca6a788b7",
-    "url": "/react-burger-app/static/js/main.63c16351.chunk.js"
+    "revision": "fa58283af33b60a1f284",
+    "url": "/react-burger-app/static/js/main.fa58283a.chunk.js"
   },
   {
     "revision": "586593ad5a423db623fb",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/react-burger-app/static/css/3.6022030f.chunk.css"
   },
   {
-    "revision": "1aa03ca9fc8bb02426a716641708e9d2",
+    "revision": "267148bb8ab3384c42d73eb5ba6b415a",
     "url": "/react-burger-app/index.html"
   }
 ];
