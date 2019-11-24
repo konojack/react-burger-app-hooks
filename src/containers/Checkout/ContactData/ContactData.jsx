@@ -8,7 +8,7 @@ import Input from 'components/UI/Input/Input'
 import classes from './ContactData.module.scss'
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import { updateObject } from '../../../shared/utility';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
 class ContactData extends Component {
     state = {
@@ -114,29 +114,6 @@ class ContactData extends Component {
 
     }
 
-    checkValidity(value, rules = {}) {
-        let isValid = true;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.minLength && isValid;
-        }
-
-        if (rules.isEmail) {
-            var pattern = /\S+@\S+\.\S+/;
-            isValid = pattern.test(value) && isValid;
-        }
-
-        return isValid;
-    }
-
     inputChangedHandler = (event, inputIdentifier) => {
         const myEventTargetValue = event.target.value;
 
@@ -146,9 +123,9 @@ class ContactData extends Component {
         // checking validity of each field
         for (let inputIdentifiers in orderForm) {
             if (inputIdentifiers === inputIdentifier) {
-                isFormValid = this.checkValidity(myEventTargetValue, orderForm[inputIdentifiers].validation) && isFormValid;
+                isFormValid = checkValidity(myEventTargetValue, orderForm[inputIdentifiers].validation) && isFormValid;
             } else {
-                isFormValid = this.checkValidity(orderForm[inputIdentifiers].value, orderForm[inputIdentifiers].validation) && isFormValid;
+                isFormValid = checkValidity(orderForm[inputIdentifiers].value, orderForm[inputIdentifiers].validation) && isFormValid;
             }
         }
 
@@ -156,7 +133,7 @@ class ContactData extends Component {
             orderForm: updateObject(prevState.orderForm, {
                 [inputIdentifier]: updateObject(prevState.orderForm[inputIdentifier], {
                     value: myEventTargetValue,
-                    valid: this.checkValidity(myEventTargetValue, prevState.orderForm[inputIdentifier].validation),
+                    valid: checkValidity(myEventTargetValue, prevState.orderForm[inputIdentifier].validation),
                     touched: true,
                 })
             }),
