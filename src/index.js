@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { watchAuth } from './store/sagas'
 import thunk from 'redux-thunk';
 import { HashRouter } from 'react-router-dom';
 import reducer from './store/reducers';
@@ -17,8 +19,12 @@ const logger = state => next => action => {
     return result;
 }
 
+const sagaMiddleware = createSagaMiddleware();
+
 const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)));
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger, sagaMiddleware)));
+
+sagaMiddleware.run(watchAuth);
 
 
 ReactDOM.render(

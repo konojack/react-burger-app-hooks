@@ -12,6 +12,10 @@ export {
 
 export {
     auth,
+    authStart,
+    authFail,
+    authSuccess,
+    checkAuthTimeout,
     logout,
     setAuthRedirectPath,
     authCheckState

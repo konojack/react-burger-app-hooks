@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 const asyncComponent = importComponent => {
-    debugger;
     return class extends Component {
         state = {
             component: null
