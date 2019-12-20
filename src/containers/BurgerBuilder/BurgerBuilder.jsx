@@ -21,7 +21,7 @@ export const BurgerBuilder = (props) => {
 
   const purchaseHandler = () => {
     if(props.isAuthenticated) {
-      setPurchasing(false);
+      setPurchasing(true);
     } else {
       props.onSetAuthRedirectPath('/checkout');
       props.history.push('/auth')
