@@ -8,26 +8,27 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 
 export const Orders = (props) => {
 
+    const { onFetchOrders, token } = props;
     useEffect(() => {
-        props.onFetchOrders(props.token);
-    }, []); 
+        onFetchOrders(token);
+    }, [onFetchOrders]); 
 
-        let orders = <Spinner />
-        if (!props.loading) {
-            orders = props.orders.map(order => {
-                return <Order
-                    key={order.id}
-                    ingredients={order.ingredients}
-                    price={order.price}
-                />
-            })
-        }
+    let orders = <Spinner />
+    if (!props.loading) {
+        orders = props.orders.map(order => {
+            return <Order
+                key={order.id}
+                ingredients={order.ingredients}
+                price={order.price}
+            />
+        })
+    }
 
-        return (
-            <div>
-                {orders}
-            </div>
-        )
+    return (
+        <div>
+            {orders}
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
